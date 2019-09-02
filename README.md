@@ -72,10 +72,9 @@ set CONDA_DLL_SEARCH_MODIFICATION_ENABLE=1
 ----------------------------------------------
 ```
 
-
-
-
-
-
-
-
+9. You can build a new executable using the following commands:
+```
+For Building an Executable--------------------
+pyinstaller --onedir --add-data tempraw;tempraw --icon=.\tempraw\myapp\static\pyicon.ico app.py
+----------------------------------------------
+```

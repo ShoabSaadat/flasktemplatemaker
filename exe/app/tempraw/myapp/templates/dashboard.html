@@ -2,18 +2,133 @@
 
 {% block content %}
 
-<div class="container">
+<!-- CSS Style --------------------------------------->
+<style media="screen">
+  *{
+  margin: 0;
+  padding: 0;
+  }
+
+  p{
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    font-size: 16px;
+  }
+
+  #wrapper-mainbuttons button{
+    margin-bottom: 10px;
+  }
+
+  #wrapper-searchfacility {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1em;
+    padding: 0.5em;
+  }
+
+  .wrapper-searchbutton{
+    justify-self: start;
+  }
+
+  .wrapper-searchbar{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media only screen and (min-width: 768px) {
+    p{
+      font-size: 14px;
+    }
+  }
+</style>
+<!-------------------------------------------------------->
+
+<!-- JS Script --------------------------------------->
+<script type=text/javascript>
+
+chosenText = $('#testInput').val();
+var testVar = [];
+
+function TestFunc(testVar){
+chosenText = $('#testInput').val();
+testVar = [chosenText, 1];
+alert('Sending your test variable: '+testVar);
+return testVar
+}
+
+$(document).ready( function () {
+  $('#testInput').attr('placeholder', 'Type text to send...');
+
+  $('#testBtn').click(function(event){
+    testVar = TestFunc(testVar)
+    $.ajax({
+      data: JSON.stringify({
+        'trigger': 'test',
+        'sentTerm': '{{sentTerm}}',
+        'testVar': testVar
+      }),
+      type: 'POST',
+      url: '{{url_for('users.ajaxhandle')}}',
+      contentType: 'application/json',
+      dataType: 'json',
+    })
+    .done(function(response){
+      window.location= response.url;
+    });
+    event.preventDefault();
+  });
+});
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+</script>
+<!-------------------------------------------------------->
+
+
+<!-- HTML Main Body ------------------------>
+<div id="wrapper-wholepage" class="container">
   <div class="jumbotron">
 
-    <h1>Application - Main</h1>
-    <h4>Dashboard</h4>
+<!-- HEADER with conditional display ------------------------>
+    <div id="wrapper-header" class="container" name='header'>
+      <h1>Application - Main</h1>
+      <h4>Dashboard</h4>
 
-    <p>
-      Welcome to your dashboard.
-    </p>
+      {%if sentTerm != 'default'%}
+      <p>Success! <strong>{{sentTerm}}!</strong></p>
+      {%elif sentTerm == 'default'%}
+      <p>Default Term!</p>
+      {%endif%}
+    </div>
 
-    <p>You can contact the author: AUTHOR_NAME for feedback through their <strong><a href="http://www.shoaibsaadat.com">WEBSITE</a></strong>.</p>
+    <div class="container">
+      <p>
+        Welcome to your dashboard.
+      </p>
+    </div>
 
+    <div class="container">
+        <div id="wrapper-searchfacility" class="container">
+          <div class="wrapper-mainbuttons">
+            <button id='testBtn' type="button" class="btn btn-primary" name="testBtn" >Test Button!</button>
+          </div>
+          <div class="wrapper-searchbar">
+            <input type="text" id="testInput" value="">
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <p>You can contact the author: AUTHOR_NAME for feedback through their <strong><a href="http://www.shoaibsaadat.com">WEBSITE</a></strong>.</p>
+    </div>
   </div>
 </div>
 

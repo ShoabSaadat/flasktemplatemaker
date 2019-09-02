@@ -3,8 +3,13 @@ from flask_login import login_required, login_user, logout_user, current_user
 from myapp.users.forms import LoginForm, RegisterForm
 from myapp.models import UserModel
 from myapp import db
+import ast
+from flask import jsonify
+
+#Defining its Blueprint------------
 users = Blueprint('users', __name__)
 
+#Main Routes----------------------------------
 @users.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
@@ -42,7 +47,28 @@ def register():
             return render_template('register.html', form=form, UserAlreadyRegistered=UserAlreadyRegistered)
     return render_template('register.html', form=form, UserAlreadyRegistered=UserAlreadyRegistered)
 
+@users.route('/ajaxhandle', methods=['POST', 'GET'])
+@login_required
+def ajaxhandle():
+    sentTerm = ''
+    testVar = []
+    if request.get_json().get('sentTerm') != '' and request.get_json().get('sentTerm') != None:
+        oldSentTerm = request.get_json().get('sentTerm')#I am not using it
+        testVar = request.get_json().get('testVar')
+        sentTerm = str('New term is: '+testVar[0])
+    packet = {'sentTerm':sentTerm, 'testVar': testVar}
+    print('packet: ', packet)
+    if request.get_json().get('trigger') == 'test':
+        return jsonify({'url': url_for('users.dashboard',packet=packet)})
+
 @users.route('/dashboard', methods=['POST','GET'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    sentTerm = 'default'
+    if request.args.get('packet') != '' and request.args.get('packet') != None:
+        packet = request.args.get('packet')
+        packet=ast.literal_eval(packet)
+        sentTerm=packet['sentTerm']
+        testVar=packet['testVar']
+        print('Sent test var from dashboard.html was: ', testVar)
+    return render_template('dashboard.html', sentTerm=sentTerm)
