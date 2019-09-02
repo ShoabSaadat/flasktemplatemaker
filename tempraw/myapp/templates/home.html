@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+
+    <h1>Application - Main</h1>
+    <h4>Welcome to the Application - Main.</h4>
+
+    <p>
+      APP_DESCRIPTION
+      <br>
+      APP_DISCLAIMER
+    </p>
+
+    {% if not current_user.is_authenticated %}
+    <p>Proceed to <strong><a href="{{url_for('users.login')}}">LOGIN</a></strong> or <strong><a href="{{url_for('users.register')}}">SIGNUP</a></strong> if you don't have an account with us.</p>
+    {% endif %}
+
+    <p>You can contact the author: AUTHOR_NAME for feedback through their <strong><a href="http://www.shoaibsaadat.com">WEBSITE</a></strong>.</p>
+
+  </div>
+</div>
+
+
+{% endblock %}

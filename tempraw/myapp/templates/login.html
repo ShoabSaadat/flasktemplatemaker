@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Application - Main</h1>
+    <h4>Please login below.</h4>
+    <p>If you do not have an account, you can create one <a href="{{url_for('users.register')}}">here:</a>.</p>
+  </div>
+
+  <div class="container">
+    <form class="" action="" method="post" enctype="multipart/form-data">
+      {{form.hidden_tag()}}
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Username</span>
+        </div>
+        {{form.username(class="form-control", placeholder="Please enter your username")}}
+      </div>
+
+       <div class="input-group mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="basic-addon1">Password</span>
+         </div>
+         {{form.password(class="form-control", placeholder="Please enter your password")}}
+       </div>
+
+      {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Application - Main</h1>
+    <h4>Please register below if you don't have an account with us.</h4>
+    <p>If you do have an account, you can login <a href="{{url_for('users.login')}}">here:</a>.</p>
+  </div>
+
+  {%if UserAlreadyRegistered%}
+  <div class="container">
+    <p>Your username or email has already been registered. Try a different one or login.</p>
+  </div>
+  {%endif%}
+
+  <div class="container">
+    <form class="" action="" method="post" enctype="multipart/form-data">
+      {{form.hidden_tag()}}
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Username</span>
+        </div>
+        {{form.username(class="form-control", placeholder="Please enter your username")}}
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Email</span>
+        </div>
+        {{form.email(class="form-control", placeholder="Please enter a valid email address")}}
+      </div>
+
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Password</span>
+        </div>
+        {{form.password(class="form-control", placeholder="Please enter your password")}}
+      </div>
+
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Password Again</span>
+        </div>
+        {{form.rep_password(class="form-control", placeholder="Please enter your password again")}}
+      </div>
+
+      {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
+    </form>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
