@@ -1,5 +1,5 @@
 @echo off
-title Handover App
+title Template Maker App
 echo Installing the app, please wait...
 start "" http://www.shoaibsaadat.com
 echo Please start configuring your app now...

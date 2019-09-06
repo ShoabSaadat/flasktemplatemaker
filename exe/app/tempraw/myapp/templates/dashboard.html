@@ -92,6 +92,28 @@ $('.popover-dismiss').popover({
 </script>
 <!-------------------------------------------------------->
 
+<!-- Modals ---------------------------------------------->
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to do this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Don't Do It</button>
+        <button id='testBtn' type="button" class="btn btn-primary" >Yes Please</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------------------------------------------------------->
 
 <!-- HTML Main Body ------------------------>
 <div id="wrapper-wholepage" class="container">
@@ -118,7 +140,7 @@ $('.popover-dismiss').popover({
     <div class="container">
         <div id="wrapper-searchfacility" class="container">
           <div class="wrapper-mainbuttons">
-            <button id='testBtn' type="button" class="btn btn-primary" name="testBtn" >Test Button!</button>
+            <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
           </div>
           <div class="wrapper-searchbar">
             <input type="text" id="testInput" value="">

@@ -11,14 +11,14 @@ static_folder = GetFolder('static')
 app = GetApp(__name__, template_folder, static_folder)
 
 #Setup Form & Database------------------
-isLive = False # True if for Heroku
-if isLive:
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-else:
+isOffline = False # False if for Heroku
+if isOffline:
     SECRET_KEY = 'MYSECRETKEY'
     dirpath = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(dirpath,'data.sqlite')
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
@@ -34,5 +34,7 @@ login_manager.login_view = 'users.login'
 #BLUEPRINT REGISTRATION----------------
 from myapp.core.views import core
 from myapp.users.views import users
+from myapp.error_pages.handlers import error_pages
 app.register_blueprint(core)
 app.register_blueprint(users)
+app.register_blueprint(error_pages)
