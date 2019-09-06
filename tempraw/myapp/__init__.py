@@ -11,7 +11,7 @@ static_folder = GetFolder('static')
 app = GetApp(__name__, template_folder, static_folder)
 
 #Setup Form & Database------------------
-isOffline = False # False if for Heroku
+isOffline = True # False if for Heroku
 if isOffline:
     SECRET_KEY = 'MYSECRETKEY'
     dirpath = os.path.abspath(os.path.dirname(__file__))
