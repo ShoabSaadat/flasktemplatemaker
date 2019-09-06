@@ -9,6 +9,17 @@
     <p>If you do not have an account, you can create one <a href="{{url_for('users.register')}}">here:</a>.</p>
   </div>
 
+  {%if UserExistsError%}
+  <div class="container">
+    <p style="color: red;">Your username or email has not been registered. Go to <a href="{{url_for('users.register')}}">Signup Page</a> to register a new account.</p>
+  </div>
+  {%endif%}
+  {%if UserPasswordError%}
+  <div class="container">
+    <p style="color: red;">Your password is not correct. Try again.</p>
+  </div>
+  {%endif%}
+
   <div class="container">
     <form class="" action="" method="post" enctype="multipart/form-data">
       {{form.hidden_tag()}}

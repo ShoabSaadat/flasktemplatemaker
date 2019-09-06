@@ -12,6 +12,8 @@ users = Blueprint('users', __name__)
 #Main Routes----------------------------------
 @users.route('/login', methods=['GET','POST'])
 def login():
+    UserExistsError = False
+    UserPasswordError = False
     form = LoginForm()
     if form.validate_on_submit():
         user = UserModel.query.filter_by(username=form.username.data).first()
@@ -23,6 +25,12 @@ def login():
                 if next == None or not next[0] == '/':
                     next = url_for('users.dashboard')
                 return redirect(next)
+            else:
+                UserPasswordError = True
+                return render_template('login.html', form=form, UserPasswordError=UserPasswordError)
+        else:
+            UserExistsError = True
+            return render_template('login.html', form=form, UserExistsError=UserExistsError)
 
     return render_template('login.html', form=form)
 
@@ -36,7 +44,7 @@ def register():
     UserAlreadyRegistered = False
     form = RegisterForm()
     if form.validate_on_submit():
-        if form.email_unique(form.username.data) and form.username_unique(form.email.data):
+        if form.email_unique(form.email.data) and form.username_unique(form.username.data):
             registeringUser = UserModel(username=form.username.data, email=form.email.data, password=form.password.data)
             db.session.add(registeringUser)
             db.session.commit()

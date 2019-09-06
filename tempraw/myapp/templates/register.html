@@ -11,7 +11,7 @@
 
   {%if UserAlreadyRegistered%}
   <div class="container">
-    <p>Your username or email has already been registered. Try a different one or login.</p>
+    <p style="color: red;">Your username or email has already been registered. Try a different one or <a href="{{url_for('users.login')}}">login</a>.</p>
   </div>
   {%endif%}
 
