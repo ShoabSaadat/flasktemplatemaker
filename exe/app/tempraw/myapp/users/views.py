@@ -58,7 +58,6 @@ def register():
             db.session.commit()
             return redirect(url_for('users.login')) #Why not login directly
         else:
-            flash('Your username or email has already been registered. Try a different one or login.')
             UserAlreadyRegistered = True
             return render_template('register.html', form=form, UserAlreadyRegistered=UserAlreadyRegistered)
     return render_template('register.html', form=form, UserAlreadyRegistered=UserAlreadyRegistered)

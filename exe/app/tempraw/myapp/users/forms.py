@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, FileField, ValidationError, SelectField, PasswordField
-from wtforms.fields.html5 import DateField
+from wtforms.fields.html5 import DateField, EmailField
 from wtforms.validators import DataRequired, Email, EqualTo
 from myapp.models import UserModel
 
@@ -12,7 +12,7 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(),Email()])
+    email = EmailField('Email', validators=[DataRequired(),Email()])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('rep_password',message='Passwords must match...')])
     rep_password = PasswordField('Repeat Password', validators=[DataRequired()])
     submitBtn = SubmitField('Register')
@@ -33,7 +33,7 @@ class RegisterForm(FlaskForm):
 ##--------------------------
 
 class RequestResetForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(),
+    email = EmailField('Email', validators=[DataRequired(),
               Email()] )
     submitBtn = SubmitField('Request Password Reset')
 
