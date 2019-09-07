@@ -37,8 +37,10 @@
          </div>
          {{form.password(class="form-control", placeholder="Please enter your password")}}
        </div>
-
-      {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
+       <div class="form-group">
+         {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
+         <small class="text-muted ml-2"> <a href="{{url_for('users.reset_request')}}">Forgot Password</a> </small>
+       </div>
     </form>
   </div>
 </div>

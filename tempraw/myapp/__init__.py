@@ -4,11 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from mainswitch import RunGuiVersion, RunWebVersion, GetApp, GetFolder
+from flask_mail import Mail
 
 #Setup App------------------------------
 template_folder = GetFolder('templates')
 static_folder = GetFolder('static')
 app = GetApp(__name__, template_folder, static_folder)
+from hashing import GetUnhashed
 
 #Setup Form & Database------------------
 isOffline = True # False if for Heroku
@@ -31,7 +33,19 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'users.login'
 
-#BLUEPRINT REGISTRATION----------------
+#Setup Mail------------------------------
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+if isOffline:
+    app.config['MAIL_USERNAME'] = GetUnhashed('0&15&15&24&22&7&4&4&11&83&22&4&1&12&0&18&19&4&17&81&6&12&0&8&11&83&2&14&12')
+    app.config['MAIL_PASSWORD'] = GetUnhashed('33&20&18&18&81&52&13&32&40&0&22')
+else:
+    app.config['MAIL_SERVER'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_SERVER'] = os.environ.get('MAIL_PASSWORD')
+mail = Mail(app)
+
+#Blueprint Registeration----------------
 from myapp.core.views import core
 from myapp.users.views import users
 from myapp.error_pages.handlers import error_pages

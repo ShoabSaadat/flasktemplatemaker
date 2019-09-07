@@ -28,3 +28,16 @@ class RegisterForm(FlaskForm):
             return False
         else:
             return True
+
+
+##--------------------------
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(),
+              Email()] )
+    submitBtn = SubmitField('Request Password Reset')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()] )
+    confirm = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match...')])
+    submitBtn = SubmitField('Reset Password')
