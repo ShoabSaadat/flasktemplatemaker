@@ -10,7 +10,7 @@ from flask_mail import Mail
 template_folder = GetFolder('templates')
 static_folder = GetFolder('static')
 app = GetApp(__name__, template_folder, static_folder)
-from hashing import GetUnhashed
+from hashing import GetUnhashed, GetHashed
 
 #Setup Form & Database------------------
 isOffline = True # False if for Heroku
@@ -38,8 +38,8 @@ app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 if isOffline:
-    app.config['MAIL_USERNAME'] = GetUnhashed('0&15&15&24&22&7&4&4&11&83&22&4&1&12&0&18&19&4&17&81&6&12&0&8&11&83&2&14&12')
-    app.config['MAIL_PASSWORD'] = GetUnhashed('33&20&18&18&81&52&13&32&40&0&22')
+    app.config['MAIL_USERNAME'] = GetUnhashed('0&15&15&24&22&7&4&4&11&82&22&4&1&12&0&18&19&4&17&80&6&12&0&8&11&82&2&14&12')
+    app.config['MAIL_PASSWORD'] = GetUnhashed('33&20&18&18&80&52&13&32&40&0&22')
 else:
     app.config['MAIL_SERVER'] = os.environ.get('MAIL_USERNAME')
     app.config['MAIL_SERVER'] = os.environ.get('MAIL_PASSWORD')

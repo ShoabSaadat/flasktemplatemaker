@@ -1,21 +1,19 @@
 {% extends 'base.html' %}
 
+{%block page_title%}Error 403!{%endblock page_title%}
+{%block page_desc%}{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
 {% block content %}
-
 <div class="container">
-  <div class="jumbotron">
-
-    <h1>Application - Main</h1>
-    <br>
-    <h4>403 Error Encountered!</h4>
+  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
+    <h5>Page has forbidden access!</h4>
     <br>
     <p>
-      Please go back to the last page as <strong>this page has forbidden access!!!</strong>
+      Please go back to the last page or try again.
     </p>
 
     <p>You can contact the author: AUTHOR_NAME for feedback through their <strong><a href="http://www.shoaibsaadat.com">WEBSITE</a></strong>.</p>
-
   </div>
 </div>
-
 {% endblock %}

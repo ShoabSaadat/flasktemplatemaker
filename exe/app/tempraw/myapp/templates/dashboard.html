@@ -1,129 +1,21 @@
 {% extends 'base.html' %}
 
+{%block page_title%}Dashboard{%endblock page_title%}
+{%block page_desc%}Welcome {{current_user.username}}{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
 {% block content %}
-
-<!-- CSS Style --------------------------------------->
-<style media="screen">
-  *{
-  margin: 0;
-  padding: 0;
-  }
-
-  p{
-    font-size: 14px;
-  }
-
-  .btn-primary {
-    font-size: 16px;
-  }
-
-  #wrapper-mainbuttons button{
-    margin-bottom: 10px;
-  }
-
-  #wrapper-searchfacility {
-    width: 100%;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 1em;
-    padding: 0.5em;
-  }
-
-  .wrapper-searchbutton{
-    justify-self: start;
-  }
-
-  .wrapper-searchbar{
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  @media only screen and (min-width: 768px) {
-    p{
-      font-size: 14px;
-    }
-  }
-</style>
-<!-------------------------------------------------------->
-
-<!-- JS Script --------------------------------------->
-<script type=text/javascript>
-
-chosenText = $('#testInput').val();
-var testVar = [];
-
-function TestFunc(testVar){
-chosenText = $('#testInput').val();
-testVar = [chosenText, 1];
-alert('Sending your test variable: '+testVar);
-return testVar
-}
-
-$(document).ready( function () {
-  $('#testInput').attr('placeholder', 'Type text to send...');
-
-  $('#testBtn').click(function(event){
-    testVar = TestFunc(testVar)
-    $.ajax({
-      data: JSON.stringify({
-        'trigger': 'test',
-        'sentTerm': '{{sentTerm}}',
-        'testVar': testVar
-      }),
-      type: 'POST',
-      url: '{{url_for('users.ajaxhandle')}}',
-      contentType: 'application/json',
-      dataType: 'json',
-    })
-    .done(function(response){
-      window.location= response.url;
-    });
-    event.preventDefault();
-  });
-});
-
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-})
-</script>
-<!-------------------------------------------------------->
-
-<!-- Modals ---------------------------------------------->
-<!-- Confirm Modal -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirm!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to do this?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Don't Do It</button>
-        <button id='testBtn' type="button" class="btn btn-primary" >Yes Please</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-------------------------------------------------------->
+<!-- Including supporting files ------------------------>
+{% include 'modals.html' %}
+<link href="{{ url_for('static', filename='css/dashboard.css')}}" rel="stylesheet">
+<script type="text/javascript" src="{{ url_for('static', filename='js/dashboard.js')}}"></script>
 
 <!-- HTML Main Body ------------------------>
-<div id="wrapper-wholepage" class="container">
-  <div class="jumbotron">
+<div class="container">
+  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
 
-<!-- HEADER with conditional display ------------------------>
-    <div id="wrapper-header" class="container" name='header'>
-      <h1>Application - Main</h1>
-      <h4>Dashboard</h4>
-
+    <!-- HEADER with conditional display ------------------------>
+    <div id="wrapper-header" name='header'>
       {%if sentTerm != 'default'%}
       <p>Success! <strong>{{sentTerm}}!</strong></p>
       {%elif sentTerm == 'default'%}
@@ -131,27 +23,20 @@ $('.popover-dismiss').popover({
       {%endif%}
     </div>
 
-    <div class="container">
-      <p>
-        Welcome to your dashboard.
-      </p>
-    </div>
+    <!-- Main content ------------------------>
+    <p>
+      Welcome to your dashboard.
+    </p>
 
-    <div class="container">
-        <div id="wrapper-searchfacility" class="container">
-          <div class="wrapper-mainbuttons">
-            <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
-          </div>
-          <div class="wrapper-searchbar">
-            <input type="text" id="testInput" value="">
-          </div>
+    <div id="wrapper-searchfacility">
+      <div class="wrapper-mainbuttons">
+        <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
+      </div>
+      <div class="wrapper-searchbar">
+        <input type="text" id="testInput" value="">
       </div>
     </div>
 
-    <div class="container">
-      <p>You can contact the author: AUTHOR_NAME for feedback through their <strong><a href="http://www.shoaibsaadat.com">WEBSITE</a></strong>.</p>
-    </div>
   </div>
 </div>
-
 {% endblock %}

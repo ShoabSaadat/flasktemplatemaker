@@ -1,36 +1,37 @@
 {% extends 'base.html' %}
 
+{%block page_title%}Login{%endblock page_title%}
+{%block page_desc%}Please login below{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
 {% block content %}
-
 <div class="container">
-  <div class="jumbotron">
-    <h1>Application - Main</h1>
-    <h4>Please login below.</h4>
-    <p>If you do not have an account, you can create one <a href="{{url_for('users.register')}}">here:</a>.</p>
-  </div>
+  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
 
-  {%if UserExistsError%}
-  <div class="container">
-    <p style="color: red;">Your username or email has not been registered. Go to <a href="{{url_for('users.register')}}">Signup Page</a> to register a new account.</p>
-  </div>
-  {%endif%}
-  {%if UserPasswordError%}
-  <div class="container">
-    <p style="color: red;">Your password is not correct. Try again.</p>
-  </div>
-  {%endif%}
+    {% if not current_user.is_authenticated %}
+    <p>Proceed to <strong><a href="{{url_for('users.register')}}">SIGNUP</a></strong> if you don't have an account with us.</p>
+    {% endif %}
 
-  <div class="container">
+    {%if UserExistsError%}
+    <div class="container">
+      <p style="color: red;">Your username or email has not been registered. Go to <a href="{{url_for('users.register')}}">Signup Page</a> to register a new account.</p>
+    </div>
+    {%endif%}
+
+    {%if UserPasswordError%}
+    <div class="container">
+      <p style="color: red;">Your password is not correct. Try again.</p>
+    </div>
+    {%endif%}
+
     <form class="" action="" method="post" enctype="multipart/form-data">
       {{form.hidden_tag()}}
-
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Username</span>
         </div>
         {{form.username(class="form-control", placeholder="Please enter your username")}}
       </div>
-
        <div class="input-group mb-3">
          <div class="input-group-prepend">
            <span class="input-group-text" id="basic-addon1">Password</span>
@@ -39,10 +40,10 @@
        </div>
        <div class="form-group">
          {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
-         <small class="text-muted ml-2"> <a href="{{url_for('users.reset_request')}}">Forgot Password</a> </small>
+         <p class="text-muted ml-2"> <a class="text-muted" href="{{url_for('users.reset_request')}}">Forgot Password</a> </p>
        </div>
     </form>
+
   </div>
 </div>
-
 {% endblock %}

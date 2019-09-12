@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 
+{%block page_title%}Register{%endblock page_title%}
+{%block page_desc%}Please register below if you don't have an account with us{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
 {% block content %}
-
 <div class="container">
-  <div class="jumbotron">
-    <h1>Application - Main</h1>
-    <h4>Please register below if you don't have an account with us.</h4>
-    <p>If you do have an account, you can login <a href="{{url_for('users.login')}}">here:</a>.</p>
-  </div>
+  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
+    {% if not current_user.is_authenticated %}
+    <p>Proceed to <strong><a href="{{url_for('users.login')}}">LOGIN</a></strong> if you have an account with us.</p>
+    {% endif %}
 
-  {%if UserAlreadyRegistered%}
-  <div class="container">
-    <p style="color: red;">Your username or email has already been registered. Try a different one or <a href="{{url_for('users.login')}}">login</a>.</p>
-  </div>
-  {%endif%}
+    {%if UserAlreadyRegistered%}
+    <div class="container">
+      <p style="color: red;">Your username or email has already been registered. Try a different one or <a href="{{url_for('users.login')}}">login</a>.</p>
+    </div>
+    {%endif%}
 
-  <div class="container">
     <form class="" action="" method="post" enctype="multipart/form-data">
       {{form.hidden_tag()}}
       <div class="input-group mb-3">
@@ -32,14 +33,12 @@
         {{form.email(class="form-control", placeholder="Please enter a valid email address")}}
       </div>
 
-
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Password</span>
         </div>
         {{form.password(class="form-control", placeholder="Please enter your password")}}
       </div>
-
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -50,10 +49,7 @@
 
       {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
     </form>
+
   </div>
 </div>
-
-
-
-
 {% endblock %}
