@@ -5,23 +5,18 @@
 {%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
 
 {% block content %}
-<div class="container">
-  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
-    <h5>Enter the email you used to register below. You will receive an email once we find your email in our system.</h5>
-    <p>If you do not have an account, you can create one <a href="{{url_for('users.register')}}">here:</a>.</p>
+<h5>Enter the email you used to register below. You will receive an email once we find your email in our system.</h5>
+<p>If you do not have an account, you can create one <a href="{{url_for('users.register')}}">here:</a>.</p>
 
-    <form class="" action="" method="post" enctype="multipart/form-data">
-      {{form.hidden_tag()}}
+<form class="" action="" method="post" enctype="multipart/form-data">
+  {{form.hidden_tag()}}
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Email</span>
-        </div>
-        {{form.email(class="form-control", placeholder="Please enter the email to receive the reset link")}}
-      </div>
-      {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
-    </form>
-
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Email</span>
+    </div>
+    {{form.email(class="form-control", placeholder="Please enter the email to receive the reset link")}}
   </div>
-</div>
+  {{form.submitBtn(class="btn btn-primary", style="width:100%")}}
+</form>
 {% endblock %}

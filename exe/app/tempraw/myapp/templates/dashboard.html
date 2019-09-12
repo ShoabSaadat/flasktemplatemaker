@@ -11,32 +11,26 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/dashboard.js')}}"></script>
 
 <!-- HTML Main Body ------------------------>
-<div class="container">
-  <div class="jumbotron p-4 p-md-5 text-black rounded bg-white">
+<!-- HEADER with conditional display ------------------------>
+<div id="wrapper-header" name='header'>
+  {%if sentTerm != 'default'%}
+  <p>Success! <strong>{{sentTerm}}!</strong></p>
+  {%elif sentTerm == 'default'%}
+  <p>Default Term!</p>
+  {%endif%}
+</div>
 
-    <!-- HEADER with conditional display ------------------------>
-    <div id="wrapper-header" name='header'>
-      {%if sentTerm != 'default'%}
-      <p>Success! <strong>{{sentTerm}}!</strong></p>
-      {%elif sentTerm == 'default'%}
-      <p>Default Term!</p>
-      {%endif%}
-    </div>
+<!-- Main content ------------------------>
+<p>
+  Welcome to your dashboard.
+</p>
 
-    <!-- Main content ------------------------>
-    <p>
-      Welcome to your dashboard.
-    </p>
-
-    <div id="wrapper-searchfacility">
-      <div class="wrapper-mainbuttons">
-        <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
-      </div>
-      <div class="wrapper-searchbar">
-        <input type="text" id="testInput" value="">
-      </div>
-    </div>
-
+<div id="wrapper-searchfacility">
+  <div class="wrapper-mainbuttons">
+    <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
+  </div>
+  <div class="wrapper-searchbar">
+    <input type="text" id="testInput" value="">
   </div>
 </div>
 {% endblock %}
