@@ -1,6 +1,6 @@
 import sys, os
 from flask import Flask
-from pyfladesk import init_gui
+#from pyfladesk import init_gui
 from flaskwebgui import FlaskUI
 
 def GetResourcePath(relative_path):
@@ -28,6 +28,6 @@ def RunWebVersion(app):
     ui = FlaskUI(app)
     ui.run()
 
-def RunGuiVersion(app, iconpath):
-    init_gui(app, port=5000, width=1280, height=800,
-             window_title="Handover App", icon=iconpath, argv=None)
+#def RunGuiVersion(app, iconpath):
+#    init_gui(app, port=5000, width=1280, height=800,
+#             window_title="Handover App", icon=iconpath, argv=None)

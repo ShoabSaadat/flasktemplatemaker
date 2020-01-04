@@ -14,6 +14,7 @@ def global_vars():
     )
 
 if __name__ == '__main__':
+    #app.run(host='0.0.0.0', port=8080, debug=isOffline) #For Repl.it
     app.run(debug=isOffline)
     #RunWebVersion(app)
     #RunGuiVersion(app, str(static_folder+"/icon.png"))

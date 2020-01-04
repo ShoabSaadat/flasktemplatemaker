@@ -3,7 +3,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from mainswitch import RunGuiVersion, RunWebVersion, GetApp, GetFolder
+from mainswitch import RunWebVersion, GetApp, GetFolder #,RunGuiVersion
 from flask_mail import Mail
 
 #Setup App------------------------------

@@ -1,0 +1,13 @@
+alembic
+flask-login
+flask-mail
+wtforms
+sqlalchemy
+flask
+flask-migrate
+flask-sqlalchemy
+flask-wtf
+flaskwebgui
+itsdangerous
+pyfladesk
+werkzeug
