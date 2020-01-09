@@ -80,3 +80,9 @@ For Building an Executable--------------------
 pyinstaller --onedir --add-data tempraw;tempraw --icon=.\tempraw\myapp\static\pyicon.ico app.py
 ----------------------------------------------
 ```
+10. In case of an online IDE use python3 and pip3commands as usual:
+```
+In Online IDEs--------------------
+pip3 install -r requirements.txt OR python3 app.py
+----------------------------------------------
+```

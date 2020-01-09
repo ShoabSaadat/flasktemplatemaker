@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{%block page_title%}Info{%endblock page_title%}
+{%block page_desc%}{{app_desc}}{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
+{% block content %}
+<p>Disclaimer: {{app_disc}}</p>
+
+{% if not current_user.is_authenticated %}
+<p>Proceed to <strong><a href="{{url_for('users.login')}}">LOGIN</a></strong> or <strong><a href="{{url_for('users.register')}}">SIGNUP</a></strong> if you don't have an account with us.</p>
+{% endif %}
+
+<p>You can contact the author: {{app_author}} for feedback through their <strong><a href="http://{{app_author_website}}">WEBSITE</a></strong>.</p>
+{% endblock %}

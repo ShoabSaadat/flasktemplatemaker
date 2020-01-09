@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{%block page_title%}Dashboard{%endblock page_title%}
+{%block page_desc%}Welcome {{current_user.username}}{%endblock page_desc%}
+{%block page_banner_link%}<a class="text-white font-weight-bold" href="#"></a>{%endblock page_banner_link%}
+
+{% block content %}
+<!-- Including supporting files ------------------------>
+{% include 'modals.html' %}
+<link href="{{ url_for('static', filename='css/dashboard.css')}}" rel="stylesheet">
+<script type="text/javascript" src="{{ url_for('static', filename='js/dashboard.js')}}"></script>
+
+<!-- HTML Main Body ------------------------>
+<!-- HEADER with conditional display ------------------------>
+<div id="wrapper-header" name='header'>
+  {%if sentTerm != 'default'%}
+  <p>Success! <strong>{{sentTerm}}!</strong></p>
+  {%elif sentTerm == 'default'%}
+  <p>Default Term!</p>
+  {%endif%}
+</div>
+
+<!-- Main content ------------------------>
+<p>
+  Welcome to your dashboard.
+</p>
+
+<div id="wrapper-searchfacility">
+  <div class="wrapper-mainbuttons">
+    <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal"> Test Button! </button>
+  </div>
+  <div class="wrapper-searchbar">
+    <input type="text" id="testInput" value="">
+  </div>
+</div>
+{% endblock %}
